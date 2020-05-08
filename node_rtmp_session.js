@@ -1076,6 +1076,8 @@ class NodeRtmpSession {
     if (context.publishers.has(this.playStreamPath)) {
       this.onStartPlay();
     } else {
+      context.nodeEvent.emit("my_play", this.id, this.playStreamPath, this.playArgs);
+
       Logger.log(`[rtmp play] Stream not found. id=${this.id} streamPath=${this.playStreamPath}  streamId=${this.playStreamId}`);
       this.isIdling = true;
       context.idlePlayers.add(this.id);
